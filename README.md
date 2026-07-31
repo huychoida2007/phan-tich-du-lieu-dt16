@@ -3,7 +3,7 @@
 
 ## 👥 Thông tin nhóm (Team Members)
 | STT | Họ và Tên | Mã Sinh Viên | Vai trò / Nhiệm vụ | Link GitHub Cá Nhân |
-|---|---|---|---|
+|---|---|---|---|---|
 | 1 | Lê Quốc Huy (Nhóm trưởng) | 3120225066 | Xây dựng lớp `MovieDataLoader` (đọc file CSV/JSON), lớp `DataCleaner` (làm sạch dữ liệu) và viết Chương 1, 2 Báo cáo Word. | [GitHub](https://github.com/huychoida2007) |
 | 2 | Hoàng Đình Quảng | 3120225125 | Xây dựng lớp `MovieAnalyzer` (vẽ 4 biểu đồ: Heatmap, Scatter, Bar, Line), viết nhận xét dữ liệu và thiết kế Slide thuyết trình. |
 | 3 | Nguyễn Huỳnh Tấn Khoa | 3120225071 | Xây dựng lớp `MovieAnalyzer` (vẽ 3 biểu đồ: Histogram, Thống kê Diễn viên, Phân tích Thập kỷ), làm phần Nâng cao (mô hình Học máy `MovieRevenuePredictor`) và viết Chương 3 Báo cáo Word. |
