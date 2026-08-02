@@ -5,9 +5,9 @@
 | STT | Họ và Tên | Mã Sinh Viên | Vai trò / Nhiệm vụ | Link GitHub Cá Nhân |
 |---|---|---|---|---|
 | 1 | Lê Quốc Huy (Nhóm trưởng) | 3120225066 | Xây dựng lớp `MovieDataLoader` (đọc file CSV/JSON), lớp `DataCleaner` (làm sạch dữ liệu) và viết Chương 1, 2 Báo cáo Word. | [GitHub](https://github.com/huychoida2007) |
-| 2 | Hoàng Đình Quảng | 3120225125 | Xây dựng lớp `MovieAnalyzer` (vẽ 3 biểu đồ đầu tiên), viết nhận xét dữ liệu và thiết kế Slide thuyết trình. Xây dựng giao diện Dashboard (app.py) dựa trên logic xử lý dữ liệu và biểu đồ có sẵn | [GitHub](https://github.com/WelizK) |
-| 3 | Nguyễn Huỳnh Tấn Khoa | 3120225071 | Xây dựng lớp `MovieAnalyzer` (vẽ 2 biểu đồ cuối), làm phần Nâng cao (mô hình Học máy `MovieRevenuePredictor`) và viết Chương 3 Báo cáo Word. |
-| 4 | Võ Hoàng Phúc | 3120225121 | Tối ưu hóa code OOP, bắt lỗi Exception, viết file `README.md` và hoàn thiện Chương 4, 5 Báo cáo Word. |
+| 2 | Hoàng Đình Quảng | 3120225125 | Xây dựng lớp `MovieAnalyzer` (vẽ 3 biểu đồ đầu tiên), viết nhận xét dữ liệu và thiết kế Slide thuyết trình. | [GitHub](...) |
+| 3 | Nguyễn Huỳnh Tấn Khoa | 3120225071 | Xây dựng lớp `MovieAnalyzer` (vẽ 2 biểu đồ cuối), làm phần Nâng cao (mô hình Học máy `MovieRevenuePredictor`) và viết Chương 3 Báo cáo Word. | [GitHub](...) |
+| 4 | Võ Hoàng Phúc | 3120225121 | Tối ưu hóa code OOP, bắt lỗi Exception, viết file `README.md` và hoàn thiện Chương 4, 5 Báo cáo Word. | [GitHub](...) |
 
 ##  Giới thiệu dự án (Description)
 Dự án phân tích bộ dữ liệu điện ảnh từ TMDB để khám phá các yếu tố then chốt gắn liền với thành công của một dự án điện ảnh (ngân sách, doanh thu, thời lượng, điểm đánh giá). Toàn bộ quy trình từ làm sạch dữ liệu, trực quan hóa đến dự đoán doanh thu đều được thực hiện thông qua mã nguồn Python trên Jupyter Notebook một cách trực quan.
@@ -33,19 +33,19 @@ Dự án phân tích bộ dữ liệu điện ảnh từ TMDB để khám phá c
 Mã nguồn được tổ chức gọn gàng để giảng viên có thể dễ dàng chạy file từ đầu đến cuối (Run All):
 
 ```bash
-Nhom01_DT16/
- ┣ data/                      # Thư mục chứa dữ liệu thô
- ┃ ┣ tmdb_5000_movies.csv     # Dữ liệu bảng phim (Định dạng CSV)
- ┃ ┗ tmdb_5000_credits.json   # Dữ liệu credits (Định dạng JSON)
- ┣ main_notebook.ipynb        # File code Jupyter Notebook chính chứa toàn bộ quy trình
- ┣ core/                      # (Bổ sung) Các lớp xử lý được tách ra để phục vụ giao diện Streamlit
- ┃ ┣ data_loader.py           #   - Class MovieDataLoader
- ┃ ┣ data_cleaner.py          #   - Class DataCleaner
- ┃ ┣ analyzer.py              #   - Class MovieAnalyzer
- ┃ ┗ predictor.py             #   - Class MovieRevenuePredictor
- ┣ app.py                     # (Bổ sung) Giao diện Dashboard tương tác bằng Streamlit
- ┣ requirements.txt           # File khai báo các thư viện cần thiết
- ┗ README.md                  # Tài liệu mô tả dự án và hướng dẫn chạy code
+ 📦Nhom01_DT16/
+ ┣ 📂data/                      # Thư mục chứa dữ liệu thô
+ ┃ ┣ 📜tmdb_5000_movies.csv     # Dữ liệu bảng phim (Định dạng CSV)
+ ┃ ┗ 📜tmdb_5000_credits.json   # Dữ liệu credits (Định dạng JSON)
+ ┣ 📜main_notebook.ipynb        # File code Jupyter Notebook chính chứa toàn bộ quy trình
+ ┣ 📂core/                      # (Bổ sung) Các lớp xử lý được tách ra để phục vụ giao diện Streamlit
+ ┃ ┣ 📜data_loader.py           #   - Class MovieDataLoader
+ ┃ ┣ 📜data_cleaner.py          #   - Class DataCleaner
+ ┃ ┣ 📜analyzer.py              #   - Class MovieAnalyzer
+ ┃ ┗ 📜predictor.py             #   - Class MovieRevenuePredictor
+ ┣ 📜app.py                     # (Bổ sung) Giao diện Dashboard tương tác bằng Streamlit
+ ┣ 📜requirements.txt           # File khai báo các thư viện cần thiết
+ ┗ 📜README.md                  # Tài liệu mô tả dự án và hướng dẫn chạy code
 
 ```
 
