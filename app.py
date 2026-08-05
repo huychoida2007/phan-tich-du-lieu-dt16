@@ -179,7 +179,7 @@ elif menu == "Phân tích & Biểu đồ":
         st.caption("📌 Đa số phim lỗ vốn không hẳn kém chất lượng (điểm trung bình 5.5-6.5).")
 
     st.markdown("---")
-    with st.expander("➕ Xem thêm 2 biểu đồ mở rộng (Bonus)"):
+    with st.expander("➕ Xem thêm biểu đồ mở rộng (Bonus)"):
         b_col1, b_col2 = st.columns(2)
         with b_col1:
             st.subheader("6️⃣ Top 10 Diễn viên theo Doanh thu")
@@ -187,6 +187,20 @@ elif menu == "Phân tích & Biểu đồ":
         with b_col2:
             st.subheader("7️⃣ Tài chính trung bình theo Thập kỷ")
             st.pyplot(analyzer.chart_7_financials_by_decade())
+
+    st.markdown("---")
+    st.subheader("📊 Phân tích chuyên sâu (Bổ sung)")
+    with st.container():
+        st.pyplot(analyzer.plot_rating_distribution())
+        st.caption("📌 Phân phối điểm đánh giá có hình chuông, tập trung quanh 6-7 điểm.")
+
+    new_col1, new_col2 = st.columns(2)
+    with new_col1:
+        st.pyplot(analyzer.plot_top_actors())
+        st.caption("📌 Top diễn viên & đạo diễn theo tổng doanh thu phòng vé.")
+    with new_col2:
+        st.pyplot(analyzer.plot_decade_trends())
+        st.caption("📌 Số lượng phim và quy mô tài chính tăng đều qua các thập kỷ.")
 
 
 # ============================================================
@@ -204,9 +218,10 @@ elif menu == "Mô hình Dự đoán":
 
     result = train_model(df_master)
 
-    m1, m2 = st.columns(2)
+    m1, m2, m3 = st.columns(3)
     m1.metric("R-squared (R²)", f"{result['r2']:.4f}")
     m2.metric("RMSE (USD)", f"{result['rmse']:,.0f}")
+    m3.metric("MAE (USD)", f"{result['mae']:,.0f}")
 
     col_chart, col_coef = st.columns([2, 1])
     with col_chart:

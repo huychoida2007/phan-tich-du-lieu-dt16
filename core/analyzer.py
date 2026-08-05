@@ -151,3 +151,155 @@ class MovieAnalyzer:
         ax.legend(title="Chỉ số tài chính")
         fig.tight_layout()
         return fig
+
+    # =============================================================
+    # CÁC HÀM PHÂN TÍCH BỔ SUNG (Main Task 1)
+    # =============================================================
+
+    def plot_rating_distribution(self):
+        """Histogram: Phân phối điểm đánh giá (vote_average) của toàn bộ phim."""
+        fig, ax = plt.subplots(figsize=(10, 6))
+        sns.histplot(
+            data=self.df, x="vote_average", bins=30, kde=True, color="steelblue", ax=ax
+        )
+        ax.axvline(
+            self.df["vote_average"].mean(),
+            color="red",
+            linestyle="--",
+            linewidth=2,
+            label=f"Trung bình: {self.df['vote_average'].mean():.2f}",
+        )
+        ax.legend()
+        ax.set_title("Phân phối Điểm đánh giá (Vote Average) của toàn bộ phim", fontsize=14)
+        ax.set_xlabel("Điểm đánh giá (0 - 10)", fontsize=12)
+        ax.set_ylabel("Số lượng phim", fontsize=12)
+        fig.tight_layout()
+        return fig
+
+    def plot_top_actors(self):
+        """Top diễn viên và đạo diễn mang lại tổng doanh thu phòng vé cao nhất."""
+        # --- Top 10 diễn viên ---
+        df_cast = self.df.assign(
+            cast=self.df["cast"].str.split(", ")
+        ).explode("cast")
+        df_cast = df_cast[df_cast["cast"] != ""]
+        top_actors = (
+            df_cast.groupby("cast")["revenue"].sum().sort_values(ascending=False).head(10)
+        )
+
+        # --- Top 10 đạo diễn ---
+        df_dir = self.df.assign(
+            crew=self.df["crew"].str.split(", ")
+        ).explode("crew")
+        df_dir = df_dir[df_dir["crew"] != ""]
+        top_directors = (
+            df_dir.groupby("crew")["revenue"].sum().sort_values(ascending=False).head(10)
+        )
+
+        fig, axes = plt.subplots(1, 2, figsize=(16, 6))
+
+        sns.barplot(
+            x=top_actors.values,
+            y=top_actors.index,
+            hue=top_actors.index,
+            palette="magma",
+            legend=False,
+            ax=axes[0],
+        )
+        axes[0].set_title("Top 10 Diễn viên theo Tổng doanh thu", fontsize=13)
+        axes[0].set_xlabel("Tổng doanh thu (USD)", fontsize=11)
+        axes[0].set_ylabel("Diễn viên", fontsize=11)
+
+        sns.barplot(
+            x=top_directors.values,
+            y=top_directors.index,
+            hue=top_directors.index,
+            palette="viridis",
+            legend=False,
+            ax=axes[1],
+        )
+        axes[1].set_title("Top 10 Đạo diễn theo Tổng doanh thu", fontsize=13)
+        axes[1].set_xlabel("Tổng doanh thu (USD)", fontsize=11)
+        axes[1].set_ylabel("Đạo diễn", fontsize=11)
+
+        fig.suptitle("Top Diễn viên & Đạo diễn mang lại Doanh thu cao nhất", fontsize=15, y=1.02)
+        fig.tight_layout()
+        return fig
+
+    def plot_decade_trends(self):
+        """Phân tích xu hướng phát triển phim qua các thập kỷ."""
+        df_decade = self.df.copy()
+        df_decade["decade"] = (df_decade["release_year"] // 10) * 10
+        df_decade = df_decade[
+            (df_decade["decade"] >= 1980) & (df_decade["decade"] <= 2010)
+        ]
+
+        decade_stats = (
+            df_decade.groupby("decade")
+            .agg(
+                movie_count=("title", "count"),
+                avg_revenue=("revenue", "mean"),
+                avg_budget=("budget", "mean"),
+            )
+            .reset_index()
+        )
+
+        fig, ax1 = plt.subplots(figsize=(12, 6))
+
+        # Cột: Số lượng phim theo thập kỷ
+        bars = sns.barplot(
+            data=decade_stats,
+            x="decade",
+            y="movie_count",
+            color="skyblue",
+            ax=ax1,
+            alpha=0.7,
+        )
+        ax1.set_xlabel("Thập kỷ (Decade)", fontsize=12)
+        ax1.set_ylabel("Số lượng phim", fontsize=12, color="steelblue")
+        ax1.tick_params(axis="y", labelcolor="steelblue")
+
+        # Thêm nhãn số lượng lên đầu mỗi cột
+        for bar, count in zip(bars.patches, decade_stats["movie_count"]):
+            ax1.text(
+                bar.get_x() + bar.get_width() / 2,
+                bar.get_height() + 0.5,
+                f"{int(count)}",
+                ha="center",
+                va="bottom",
+                fontsize=10,
+                fontweight="bold",
+                color="steelblue",
+            )
+
+        # Đường: Doanh thu & Ngân sách trung bình trên trục phụ
+        ax2 = ax1.twinx()
+        sns.lineplot(
+            data=decade_stats,
+            x="decade",
+            y="avg_revenue",
+            marker="o",
+            color="crimson",
+            linewidth=2.5,
+            label="Doanh thu TB",
+            ax=ax2,
+        )
+        sns.lineplot(
+            data=decade_stats,
+            x="decade",
+            y="avg_budget",
+            marker="s",
+            color="darkorange",
+            linewidth=2.5,
+            label="Ngân sách TB",
+            ax=ax2,
+        )
+        ax2.set_ylabel("Số tiền trung bình (USD)", fontsize=12)
+        ax2.tick_params(axis="y")
+        ax2.legend(title="Chỉ số tài chính", loc="upper left")
+
+        ax1.set_title(
+            "Xu hướng phát triển điện ảnh theo Thập kỷ (1980s - 2010s)", fontsize=14
+        )
+        fig.tight_layout()
+        return fig
